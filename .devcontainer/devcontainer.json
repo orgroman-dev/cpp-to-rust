@@ -1,4 +1,4 @@
 {
     "name": "Clang and Rust Development Environment",
-    "dockerFile": "Dockerfile"
+    "dockerFile": "../Dockerfile"
 }
