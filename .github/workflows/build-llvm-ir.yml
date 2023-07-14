@@ -17,16 +17,15 @@ jobs:
               uses: egor-tensin/setup-clang@v1
 
             - name: Configure the project
-              uses: threeal/cmake-action@v1.2.0
-              with:
-                run-build: true
-                generator: Ninja
-                c-compiler: clang
-                cxx-compiler: clang++
-                c-flags: '-emit-llvm'
-                cxx-flags: '-emit-llvm'
-                source-dir: ./3rdparty/rapidjson
-                build-dir: ./3rdparty/rapidjson/out
+              run: |
+                mkdir -p 3rdparty/rapidjson/out
+                cd 3rdparty/rapidjson/out
+                cmake -GNinja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_FLAGS="-emit-llvm" -DCMAKE_CXX_FLAGS="-emit-llvm" ..
+
+            - name: Build the project
+              run: |
+                cd 3rdparty/rapidjson/out
+                ninja
                 
             - name: Save LLVM IR as artifact
               uses: actions/upload-artifact@v2
