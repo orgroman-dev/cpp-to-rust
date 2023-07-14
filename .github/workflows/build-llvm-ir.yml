@@ -29,8 +29,12 @@ jobs:
                 cd 3rdparty/rapidjson/out
                 make
 
+            - name: Find LLVM IR files
+              run: |
+                  find ./3rdparty/rapidjson/out -name "*.ll"
+                  
             - name: Save LLVM IR as artifact
               uses: actions/upload-artifact@v2
               with:
-                name: llvm-ir-artifact
-                path: ./3rdparty/rapidjson/out/*.ll
+                  name: llvm-ir-artifact
+                  path: ./3rdparty/rapidjson/out/**/*.ll
