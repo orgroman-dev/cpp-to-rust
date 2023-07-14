@@ -20,7 +20,7 @@ jobs:
               run: |
                 mkdir -p 3rdparty/rapidjson/out
                 cd 3rdparty/rapidjson/out
-                cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_FLAGS="-emit-llvm" -DCMAKE_CXX_FLAGS="-emit-llvm" ..
+                cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_FLAGS="-emit-llvm" -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=lld" -DCMAKE_CXX_FLAGS="-emit-llvm" ..
 
             - name: Save LLVM IR as artifact
               uses: actions/upload-artifact@v2
