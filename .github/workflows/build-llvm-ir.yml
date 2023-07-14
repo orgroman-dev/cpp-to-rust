@@ -1,0 +1,28 @@
+name: Build 3rd party projects to LLVM IR
+
+on: 
+    workflow_dispatch
+
+jobs:
+    build-clang-llvm:
+        name: Compile cpp projects to LLVM IR
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                submodules: 'true'
+
+            - name: Set up Clang
+              uses: egor-tensin/setup-clang@v1
+
+            - name: Configure the project
+              uses: threeal/cmake-action@v1.2.0
+              with:
+                run-build: true
+                generator: Ninja
+                c-compiler: clang
+                cxx-compiler: clang++
+                source-dir: ./3rdparty/rapidjson
+                build-dir: ./3rdparty/rapidjson/out
+
