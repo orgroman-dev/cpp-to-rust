@@ -28,7 +28,12 @@ jobs:
                 mkdir -p 3rdparty/rapidjson/out
                 cd 3rdparty/rapidjson/out
                 cmake -DCMAKE_TOOLCHAIN_FILE=../../../llvm-toolchain.cmake ..
-
+            
+            - name: Build the project
+              run: |
+                  cd 3rdparty/rapidjson/out
+                  make
+                  
             - name: Save LLVM IR as artifact
               uses: actions/upload-artifact@v2
               with:
