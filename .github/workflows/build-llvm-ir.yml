@@ -18,11 +18,9 @@ jobs:
 
             - name: Configure the project
               run: |
-                echo 'set(CMAKE_C_FLAGS "-emit-llvm -S")' >> 3rdparty/rapidjson/CMakeLists.txt
-                echo 'set(CMAKE_CXX_FLAGS "-emit-llvm -S")' >> 3rdparty/rapidjson/CMakeLists.txt
                 mkdir -p 3rdparty/rapidjson/out
                 cd 3rdparty/rapidjson/out
-                cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ ..
+                cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_FLAGS="-emit-llvm -S" -DCMAKE_CXX_FLAGS="-emit-llvm -S" ..
 
             - name: Build the project
               run: |
